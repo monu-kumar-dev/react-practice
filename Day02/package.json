@@ -1,0 +1,24 @@
+{
+  "name": "reactbasic",
+  "version": "1.0.0",
+  "description": "\"Learning React\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monu-kumar-dev/react-practice.git"
+  },
+  "author": "Monu Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monu-kumar-dev/react-practice/issues"
+  },
+  "homepage": "https://github.com/monu-kumar-dev/react-practice#readme",
+  "dependencies": {
+    "parcel": "^2.16.3",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  }
+}
