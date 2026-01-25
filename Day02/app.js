@@ -39,3 +39,9 @@ const reactRoot = ReactDOM.createRoot(container);
 const div1 = React.createElement("div", {}, [element, element2]);
 
 reactRoot.render(div1);
+
+// Create lie this using react:--->
+// {/* <div>
+//     <h1>Hello coder Army</h1>
+//     <h2>Maja aaya mujhe</h2>
+// </div> */}
