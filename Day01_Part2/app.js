@@ -15,3 +15,21 @@ const container = document.getElementById("root");
 const reactRoot = ReactDOM.createRoot(container);
 
 reactRoot.render(element);
+
+// +++++++++++ why .createRoot +++++++++++++++++++
+
+// const reactRoot = ReactDOM.createRoot(container);
+
+// 👉 createRoot kyun?
+// React ko bataya ja raha hai:---->
+// “Is container ka control ab React ke paas hai.”
+
+// Ye root:---->
+
+// rendering manage karta hai
+// updates schedule karta hai
+// concurrent features enable karta hai
+
+// 🧠 Real-life example:  --->
+// container = stage
+// createRoot = director 🎬
