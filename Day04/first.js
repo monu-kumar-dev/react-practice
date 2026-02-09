@@ -2,8 +2,8 @@ import React from "react";
 import ReactDom from "react-dom/client";
 
 const element1 = <h1>Hello Coder Army</h1>;
-// JSX: JS Expression (output laake de: Result produce)
-// JSX: Statement (unko aap nhi likh skte) like: let x = 2;
+// JSX: <- JS Expression (output laake de: Result produce)
+// JSX: <- Statement (unko aap nhi likh skte) like: let x = 2;
 
 let obj = {
   name: "Monu ji",
