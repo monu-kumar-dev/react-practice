@@ -49,3 +49,25 @@ button {
 .card {
   background-color: rgb(28, 81, 28);
 }
+
+.sorting {
+  height:auto;
+  border: 2px solid red;
+  font-size: 1.5rem;
+  color: white;
+  background-color: blue;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.sorting:hover {
+  background-color: darkblue;
+  transform: scale(1.05);
+}
+
+.sorting:active {
+  transform: scale(0.95);
+}
