@@ -3,10 +3,9 @@ import ReactDom from "react-dom/client";
 import Card from "./component/Card";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
-// import products from "./utils/dummy";
-import { useState } from "react";
-import productsData from "./utils/dummy";
-import Price from "./component/Price";
+import products from "./utils/dummy";
+import { useState } from "react"; // usestate use kr arha hu kyuki dom manipulate kr raha hai react
+
 // Yaha mai sikh raha hu ki agr ek file me agr export zyada hai tb use import kaise krenge. Upar jo import hai wo export default ke liye hai.
 
 // Note ye kewal export ke liye not for export default:--->
@@ -15,23 +14,42 @@ import Price from "./component/Price";
 // we can also change the name of function using as like:--->
 import { Greet as Goa, Meet as Moa } from "./utils/dummy";
 
+console.log(products);
+
 function App() {
-  const [products, setProducts] = useState(productsData);
-  
-  function sortLowToHigh() {
-    const sorted = [...products].sort((a, b) => Number(a.Rs) - Number(b.Rs));
-    setProducts(sorted);
+  let [A, setA] = useState(products);
+
+  // function sortArray() {
+  //   products.sort((a, b) => a.Rs - b.Rs);
+  //   setA([...A]);
+  //   console.log(products);
+  // }
+
+  function sortArray() {
+    const sorted = [...A].sort((a, b) => a.Rs - b.Rs);
+    setA(sorted);
   }
+
+  function priceAbove999() {
+    const B = products.filter((value)=>value.Rs > 999)
+    setA(B);
+  }
+
   return (
     <>
-      {/* Button for price high */}
-      <Price sort={sortLowToHigh} />
       <Header />
+      <button className="sorting" onClick={sortArray}>
+        Sort By Price
+      </button>
+
+      <button className="sorting" onClick={priceAbove999}>
+        Price above 999
+      </button>
       {/* // Body */}
       <div className="middle">
         {/* here we use map because it's return an array. */}
 
-        {products.map((item) => (
+        {A.map((item) => (
           <Card
             key={item.id}
             img_link={item.img_link}
