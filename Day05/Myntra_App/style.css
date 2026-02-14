@@ -21,17 +21,17 @@ body {
 
 button {
   margin-right: 20px;
-  height: 30px;
+  height: 35px;
   border: none;
   background-color: white;
-  font-size: 20px;
+  font-size: 21px;
 }
 
 .searchBar {
   width: 400px;
   height: 30px;
   position: relative;
-  top: 20px;
+  top: 25px;
 }
 
 .profile {
