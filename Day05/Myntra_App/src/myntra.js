@@ -65,7 +65,8 @@ function App() {
       <div className="middle">
         {/* here we use map because it's return an array. */}
 
-        {products.map((item) => (
+{/* jo state bnta hai wo yaha use hota hai, state me A hai naa ki ab products. so replace products to A */}
+        {A.map((item) => (
           <Card
             key={item.id}
             img_link={item.img_link}
