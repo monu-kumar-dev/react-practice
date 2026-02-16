@@ -19,21 +19,37 @@ console.log(products);
 function App() {
   let [A, setA] = useState(products);
 
+  function sortArray() {
+    products.sort((a, b) => a.Rs - b.Rs);
+    setA([...A]);
+    // Why we use setA([...A]) line:----->
+
+    // 🧠 React ka Golden Rule:--->
+    // React re-render tab karta hai jab State change hoti hai.
+    //  Normal variable change hone se React ko pata hi nahi chalta.
+
+    // 🔥 Ab samjho setA([...A]) kya karta hai:---->
+    // Ye kya kar raha hai?
+
+    //[...A] → ek naya array reference bana raha hai
+    //setA() → React ko bol raha hai:-->
+    // “State change ho gayi hai”
+    // React dekhta hai:
+    // Old reference !== New reference
+    // → Re-render trigger
+
+    console.log(products);
+  }
+
   // function sortArray() {
-  //   products.sort((a, b) => a.Rs - b.Rs);
-  //   setA([...A]);
-  //   console.log(products);
+  //   const sorted = [...A].sort((a, b) => a.Rs - b.Rs);
+  //   setA(sorted);
   // }
 
-  function sortArray() {
-    const sorted = [...A].sort((a, b) => a.Rs - b.Rs);
-    setA(sorted);
-  }
-
-  function priceAbove999() {
-    const B = products.filter((value)=>value.Rs > 999)
-    setA(B);
-  }
+  // function priceAbove999() {
+  //   const B = products.filter((value)=>value.Rs > 999)
+  //   setA(B);
+  // }
 
   return (
     <>
@@ -42,14 +58,14 @@ function App() {
         Sort By Price
       </button>
 
-      <button className="sorting" onClick={priceAbove999}>
+      {/* <button className="sorting" onClick={priceAbove999}>
         Price above 999
-      </button>
+      </button> */}
       {/* // Body */}
       <div className="middle">
         {/* here we use map because it's return an array. */}
 
-        {A.map((item) => (
+        {products.map((item) => (
           <Card
             key={item.id}
             img_link={item.img_link}
