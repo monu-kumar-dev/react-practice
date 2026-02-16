@@ -53,10 +53,19 @@ function App() {
     setA(sorted);
   }
 
-  // function priceAbove999() {
-  //   const B = products.filter((value)=>value.Rs > 999)
-  //   setA(B);
-  // }
+  // 🧠 Filter Function
+  // Yaha hum original products se filter kar rahe hain
+  // Taaki har baar fresh filtering ho.
+  function priceAbove999() {
+    const B = products.filter((value) => value.Rs > 999);
+    setA(B);
+  }
+
+  // 🧠 Reset Function
+  // Agar filter ya sort ke baad sab wapas chahiye
+  function resetProducts() {
+    setA(products);
+  }
 
   return (
     <>
@@ -65,9 +74,14 @@ function App() {
         Sort By Price
       </button>
 
-      {/* <button className="sorting" onClick={priceAbove999}>
+      <button className="sorting" onClick={priceAbove999}>
         Price above 999
-      </button> */}
+      </button>
+
+      <button className="sorting" onClick={resetProducts}>
+        Reset
+      </button>
+
       {/* // Body */}
       <div className="middle">
         {/* here we use map because it's return an array. */}
