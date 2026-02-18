@@ -70,8 +70,7 @@ function Colorful({name}) {
   );
 }
 
-// export default Colorful; 
-
+// export default Colorful;
 // Note:-> Jb mere ek function ke inside me ek aur function hai aur mai inside wale ko cakk nhi krna chahta ya jb bhi render hota hai to total call hota hai to inside wala bhi call hote rhegaa to call se bachane ke liye use krte hai React.memo ka.
 
 export default React.memo(Colorful);
