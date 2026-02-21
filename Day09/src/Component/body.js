@@ -5,15 +5,33 @@ function Body() {
   const [numberofProfile, setnumberofProfile] = useState("");
 
   async function generateProfile(count) {
-    const random = Math.floor(Math.random() * 10000 + 1);
-    const response = await fetch(
-      `https://api.github.com/users?since=${random}&per_page=${count}`,
-    );
-    const data = await response.json();
+    try {
+      const parsedCount = Number(count);
 
-    setProfile(data);
+      // Input validation
+      if (!parsedCount || parsedCount <= 0) {
+        throw new Error("Please enter a valid number greater than 0");
+      }
+
+      const random = Math.floor(Math.random() * 10000 + 1);
+
+      const response = await fetch(
+        `https://api.github.com/users?since=${random}&per_page=${count}`,
+      );
+
+      // API response check
+      if (!response.ok) {
+        throw new Error("Failed to fetch profiles from GitHub");
+      }
+
+      const data = await response.json();
+
+      setProfile(data);
+    } catch (error) {
+      console.error("Error:", error.message);
+      alert(error.message);
+    }
   }
-
   useEffect(() => {
     generateProfile(10);
   }, []);
