@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function Body() {
   const [Profile, setProfile] = useState([]);
-  const [numberofProfile, setnumberofProfile] = useState([""]);
+  const [numberofProfile, setnumberofProfile] = useState("");
 
   async function generateProfile(count) {
     const random = Math.floor(Math.random() * 10000 + 1);
@@ -27,14 +27,13 @@ function Body() {
         value={numberofProfile}
         onChange={(e) => setnumberofProfile(e.target.value)}
       ></input>
-
       <button
         className="sub"
         onClick={() => generateProfile(Number(numberofProfile))}
       >
         Search Profiles
       </button>
-
+      {/* Profile view */}
       <div className="profiles">
         {Profile.map((value) => {
           return (
@@ -48,12 +47,12 @@ function Body() {
           );
         })}
       </div>
+      //{" "}
     </div>
   );
 }
 
 export default Body;
-
 
 // Try catch functionality add karo
 // use call back function add krne ki koshish kro
