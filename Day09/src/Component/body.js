@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 function Body() {
   const [Profile, setProfile] = useState([]);
   const [numberofProfile, setnumberofProfile] = useState("");
+  // Adding for search profile
+  const [username, setUsername] = useState("");
 
   async function generateProfile(count) {
     try {
@@ -37,6 +39,7 @@ function Body() {
   }, []);
 
   return (
+    // Ye number wala hai
     <div className="button">
       <input
         type="number"
@@ -51,6 +54,17 @@ function Body() {
       >
         Search Profiles
       </button>
+
+      {/* Ye username wala hai */}
+      <input
+        type="text"
+        className = " inpu second_inpu"
+        placeholder="Enter username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <button className="sub2 sub">Search User</button>
+
       {/* Profile view */}
       <div className="profiles">
         {Profile.map((value) => {
