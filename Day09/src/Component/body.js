@@ -38,6 +38,30 @@ function Body() {
     generateProfile(10);
   }, []);
 
+  // function for username
+  async function handleUserSearch() {
+    try {
+      if (!username.trim()) {
+        throw new Error("Please enter a username");
+      }
+
+      const response = await fetch(`https://api.github.com/users/${username}`);
+
+      if (!response.ok) {
+        throw new Error("User not found");
+      }
+
+      const data = await response.json();
+
+      // Because Profile is array → wrap single user inside array
+      setProfile([data]);
+    } catch (error) {
+      console.error("Error:", error.message);
+      alert(error.message);
+      setProfile([]); // clear profiles if error
+    }
+  }
+
   return (
     // Ye number wala hai
     <div className="button">
@@ -54,17 +78,17 @@ function Body() {
       >
         Search Profiles
       </button>
-
       {/* Ye username wala hai */}
       <input
         type="text"
-        className = " inpu second_inpu"
+        className=" inpu second_inpu"
         placeholder="Enter username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <button className="sub2 sub">Search User</button>
-
+      <button className="sub2 sub" onClick={handleUserSearch}>
+        Search User
+      </button>
       {/* Profile view */}
       <div className="profiles">
         {Profile.map((value) => {
