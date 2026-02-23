@@ -18,7 +18,7 @@ function Body() {
       const random = Math.floor(Math.random() * 10000 + 1);
 
       const response = await fetch(
-        `https://api.github.com/users?since=${random}&per_page=${count}`,
+        `https://api.github.com/users?since=${random}&per_page=${parsedCount}`,
       );
 
       // API response check
@@ -63,7 +63,7 @@ function Body() {
   }
 
   return (
-    // Ye number wala hai
+
     <div className="button">
       <input
         type="number"
