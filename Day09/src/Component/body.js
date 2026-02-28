@@ -1,114 +1,114 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
-function Body() {
-  const [Profile, setProfile] = useState([]);
-  const [numberofProfile, setnumberofProfile] = useState("");
-  // Adding for search profile
-  const [username, setUsername] = useState("");
+// function Body() {
+//   const [Profile, setProfile] = useState([]);
+//   const [numberofProfile, setnumberofProfile] = useState("");
+//   // Adding for search profile
+//   const [username, setUsername] = useState("");
 
-  async function generateProfile(count) {
-    try {
-      const parsedCount = Number(count);
+//   async function generateProfile(count) {
+//     try {
+//       const parsedCount = Number(count);
 
-      // Input validation
-      if (!parsedCount || parsedCount <= 0) {
-        throw new Error("Please enter a valid number greater than 0");
-      }
+//       // Input validation
+//       if (!parsedCount || parsedCount <= 0) {
+//         throw new Error("Please enter a valid number greater than 0");
+//       }
 
-      const random = Math.floor(Math.random() * 10000 + 1);
+//       const random = Math.floor(Math.random() * 10000 + 1);
 
-      const response = await fetch(
-        `https://api.github.com/users?since=${random}&per_page=${parsedCount}`,
-      );
+//       const response = await fetch(
+//         `https://api.github.com/users?since=${random}&per_page=${parsedCount}`,
+//       );
 
-      // API response check
-      if (!response.ok) {
-        throw new Error("Failed to fetch profiles from GitHub");
-      }
+//       // API response check
+//       if (!response.ok) {
+//         throw new Error("Failed to fetch profiles from GitHub");
+//       }
 
-      const data = await response.json();
+//       const data = await response.json();
 
-      setProfile(data);
-    } catch (error) {
-      console.error("Error:", error.message);
-      alert(error.message);
-    }
-  }
-  useEffect(() => {
-    generateProfile(10);
-  }, []);
+//       setProfile(data);
+//     } catch (error) {
+//       console.error("Error:", error.message);
+//       alert(error.message);
+//     }
+//   }
+//   useEffect(() => {
+//     generateProfile(10);
+//   }, []);
 
-  // function for username
-  async function handleUserSearch() {
-    try {
-      if (!username.trim()) {
-        throw new Error("Please enter a username");
-      }
+//   // function for username
+//   async function handleUserSearch() {
+//     try {
+//       if (!username.trim()) {
+//         throw new Error("Please enter a username");
+//       }
 
-      const response = await fetch(`https://api.github.com/users/${username}`);
+//       const response = await fetch(`https://api.github.com/users/${username}`);
 
-      if (!response.ok) {
-        throw new Error("User not found");
-      }
+//       if (!response.ok) {
+//         throw new Error("User not found");
+//       }
 
-      const data = await response.json();
+//       const data = await response.json();
 
-      // Because Profile is array → wrap single user inside array
-      setProfile([data]);
-    } catch (error) {
-      console.error("Error:", error.message);
-      alert(error.message);
-      setProfile([]); // clear profiles if error
-    }
-  }
+//       // Because Profile is array → wrap single user inside array
+//       setProfile([data]);
+//     } catch (error) {
+//       console.error("Error:", error.message);
+//       alert(error.message);
+//       setProfile([]); // clear profiles if error
+//     }
+//   }
 
-  return (
+//   return (
 
-    <div className="button">
-      <input
-        type="number"
-        className="inpu"
-        placeholder="Search here"
-        value={numberofProfile}
-        onChange={(e) => setnumberofProfile(e.target.value)}
-      ></input>
-      <button
-        className="sub"
-        onClick={() => generateProfile(Number(numberofProfile))}
-      >
-        Search Profiles
-      </button>
-      {/* Ye username wala hai */}
-      <input
-        type="text"
-        className=" inpu second_inpu"
-        placeholder="Enter username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <button className="sub2 sub" onClick={handleUserSearch}>
-        Search User
-      </button>
-      {/* Profile view */}
-      <div className="profiles">
-        {Profile.map((value) => {
-          return (
-            <div key={value.id} className="cards">
-              <img src={value.avatar_url} alt="avatar" />
-              <h2>{value.login}</h2>
-              <a href={value.html_url} target="_blank" rel="noreferrer">
-                Profile
-              </a>
-            </div>
-          );
-        })}
-      </div>
-      //{" "}
-    </div>
-  );
-}
+//     <div className="button">
+//       <input
+//         type="number"
+//         className="inpu"
+//         placeholder="Search here"
+//         value={numberofProfile}
+//         onChange={(e) => setnumberofProfile(e.target.value)}
+//       ></input>
+//       <button
+//         className="sub"
+//         onClick={() => generateProfile(Number(numberofProfile))}
+//       >
+//         Search Profiles
+//       </button>
+//       {/* Ye username wala hai */}
+//       <input
+//         type="text"
+//         className=" inpu second_inpu"
+//         placeholder="Enter username"
+//         value={username}
+//         onChange={(e) => setUsername(e.target.value)}
+//       />
+//       <button className="sub2 sub" onClick={handleUserSearch}>
+//         Search User
+//       </button>
+//       {/* Profile view */}
+//       <div className="profiles">
+//         {Profile.map((value) => {
+//           return (
+//             <div key={value.id} className="cards">
+//               <img src={value.avatar_url} alt="avatar" />
+//               <h2>{value.login}</h2>
+//               <a href={value.html_url} target="_blank" rel="noreferrer">
+//                 Profile
+//               </a>
+//             </div>
+//           );
+//         })}
+//       </div>
+//       //{" "}
+//     </div>
+//   );
+// }
 
-export default Body;
+// export default Body;
 
 // Try catch functionality add karo
 // use call back function add krne ki koshish kro
@@ -231,3 +231,65 @@ FINAL GOLDEN RULE:
 {}  → manual return
 {} in JSX → JavaScript mode
 */
+
+// +++++++++++++++++++++ Convert it into custom hook ++++++++++++
+
+import useFetch from "../useFetch";
+console.log("Body First");
+function Body() {
+  const {
+    generateProfile,
+    numberofProfile,
+    setnumberofProfile,
+    Profile,
+    username,
+    setUsername,
+    handleUserSearch,
+  } = useFetch();
+  console.log("Body Last");
+
+  return (
+    <div className="button">
+      <input
+        type="number"
+        className="inpu"
+        placeholder="Search here"
+        value={numberofProfile}
+        onChange={(e) => setnumberofProfile(e.target.value)}
+      ></input>
+      <button
+        className="sub"
+        onClick={() => generateProfile(Number(numberofProfile))}
+      >
+        Search Profiles
+      </button>
+      {/* Ye username wala hai */}
+      <input
+        type="text"
+        className=" inpu second_inpu"
+        placeholder="Enter username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <button className="sub2 sub" onClick={handleUserSearch}>
+        Search User
+      </button>
+      {/* Profile view */}
+      <div className="profiles">
+        {Profile.map((value) => {
+          return (
+            <div key={value.id} className="cards">
+              <img src={value.avatar_url} alt="avatar" />
+              <h2>{value.login}</h2>
+              <a href={value.html_url} target="_blank" rel="noreferrer">
+                Profile
+              </a>
+            </div>
+          );
+        })}
+      </div>
+      //{" "}
+    </div>
+  );
+}
+export default Body;
